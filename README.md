@@ -6,7 +6,6 @@ This repository contains my submission for the database management assignment. I
 
 - `LibraryApp/` - This folder contains the actual Spring Boot project code.
 - `Submission.pdf` - The final report containing screenshots, the ER diagram, and explanations of the code.
-- `generate_pdf.py` - A python script used to compile the PDF report.
 
 ## About the Project
 
@@ -23,5 +22,3 @@ The application implements standard CRUD operations using Spring Data JPA and an
 1. Open the `LibraryApp` folder in your IDE (like IntelliJ or Eclipse) as a Maven project.
 2. Run `LibraryApplication.java`.
 3. Open `http://localhost:8080/` in your browser.
-
-*Note: Since it uses an in-memory database, any data you add will be lost when you stop the application.*
