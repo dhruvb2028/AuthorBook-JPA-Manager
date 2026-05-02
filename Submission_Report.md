@@ -58,7 +58,7 @@ The database is initialized using Spring Boot's `@PostConstruct` annotation in t
 ![alt text](image-2.png)
 ![alt text](image-4.png)
 ![alt text](image-3.png)
-*(Placeholder: As this is a text representation, you should run the application and take screenshots of the `index.jsp` page, the `addBook.jsp` page, and the `updateBook.jsp` page to insert them here before exporting to PDF.)*
+
 
 ## 4. Challenges Faced & Solutions
 
@@ -75,4 +75,4 @@ The database is initialized using Spring Boot's `@PostConstruct` annotation in t
 - *Solution*: Explicitly wrote an inner join using JPQL `@Query` in the repository layer instead of relying solely on default methods.
 
 ## 5. Github URL
-*(Insert your GitHub repository link here after pushing the code)*
+https://github.com/dhruvb2028/AuthorBook-JPA-Manager

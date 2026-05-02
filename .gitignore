@@ -59,5 +59,7 @@ env/
 
 # Optional: You can choose to ignore the raw screenshots and scripts if you only want to push the final PDF and Code.
 # image*.png
-# generate_pdf.py
+generate_pdf.py
 # er_diagram.svg
+Submission_Report.md
+

@@ -6,7 +6,7 @@ from reportlab.lib.units import inch
 from svglib.svglib import svg2rlg
 
 def create_pdf():
-    pdf_path = "Submission_Report.pdf"
+    pdf_path = "Submission.pdf"
     doc = SimpleDocTemplate(pdf_path, pagesize=letter, rightMargin=40, leftMargin=40, topMargin=40, bottomMargin=40)
     styles = getSampleStyleSheet()
     
@@ -49,10 +49,11 @@ def create_pdf():
     
     # 2. Implementation Details
     story.append(Paragraph("2. Implementation Details (Code)", heading_style))
-    story.append(Spacer(1, 0.1 * inch))
+    story.append(Spacer(1, 0.2 * inch))
     
     # a) Populate DB
     story.append(Paragraph("<b>a) Populate Database</b>", body_style))
+    story.append(Spacer(1, 0.05 * inch))
     code_pop = """@PostConstruct
 @Transactional
 public void populateDatabase() {
@@ -66,10 +67,11 @@ public void populateDatabase() {
     }
 }"""
     story.append(Preformatted(code_pop, code_style))
-    story.append(Spacer(1, 0.1 * inch))
+    story.append(Spacer(1, 0.2 * inch))
     
     # b) Create Operation
     story.append(Paragraph("<b>b) Create Operation</b>", body_style))
+    story.append(Spacer(1, 0.05 * inch))
     code_create = """@PostMapping("/addBook")
 public String addBook(@ModelAttribute("book") Book book, Model model) {
     try {
@@ -82,10 +84,11 @@ public String addBook(@ModelAttribute("book") Book book, Model model) {
     }
 }"""
     story.append(Preformatted(code_create, code_style))
-    story.append(Spacer(1, 0.1 * inch))
+    story.append(Spacer(1, 0.2 * inch))
     
     # c) Read Operation
     story.append(Paragraph("<b>c) Read Operation</b>", body_style))
+    story.append(Spacer(1, 0.05 * inch))
     code_read = """// BookRepository.java (Custom inner join)
 @Query("SELECT b FROM Book b JOIN b.author a")
 List<Book> findAllBooksWithAuthors();
@@ -100,10 +103,11 @@ List<Book> findAllBooksWithAuthors();
     </tr>
 </c:forEach>"""
     story.append(Preformatted(code_read, code_style))
-    story.append(Spacer(1, 0.1 * inch))
+    story.append(Spacer(1, 0.2 * inch))
     
     # d) Update Operation
     story.append(Paragraph("<b>d) Update Operation</b>", body_style))
+    story.append(Spacer(1, 0.05 * inch))
     code_update = """@GetMapping("/updateBook/{id}")
 public String showUpdateBookForm(@PathVariable("id") Long id, Model model) {
     Book book = libraryService.getBookById(id);
@@ -112,14 +116,20 @@ public String showUpdateBookForm(@PathVariable("id") Long id, Model model) {
     return "updateBook";
 }"""
     story.append(Preformatted(code_update, code_style))
-    story.append(Spacer(1, 0.2 * inch))
+    story.append(Spacer(1, 0.4 * inch))
     
     # 3. Screenshots
     story.append(PageBreak())
     story.append(Paragraph("3. Screenshots", heading_style))
-    story.append(Spacer(1, 0.1 * inch))
+    story.append(Spacer(1, 0.2 * inch))
     
-    screenshots = ['image.png', 'image-1.png', 'image-2.png', 'image-4.png', 'image-3.png']
+    screenshots = [
+        'screenshots/image.png', 
+        'screenshots/image-1.png', 
+        'screenshots/image-2.png', 
+        'screenshots/image-4.png', 
+        'screenshots/image-3.png'
+    ]
     for img_path in screenshots:
         if os.path.exists(img_path):
             try:
@@ -130,7 +140,7 @@ public String showUpdateBookForm(@PathVariable("id") Long id, Model model) {
                 target_height = target_width * (ih / float(iw))
                 img = Image(img_path, width=target_width, height=target_height)
                 story.append(img)
-                story.append(Spacer(1, 0.2 * inch))
+                story.append(Spacer(1, 0.3 * inch))
             except Exception as e:
                 story.append(Paragraph(f"[Error loading {img_path}: {e}]", body_style))
     
@@ -138,7 +148,7 @@ public String showUpdateBookForm(@PathVariable("id") Long id, Model model) {
     
     # 4. Challenges
     story.append(Paragraph("4. Challenges Faced & Solutions", heading_style))
-    story.append(Spacer(1, 0.1 * inch))
+    story.append(Spacer(1, 0.15 * inch))
     challenges = """
     <b>Challenge 1: JSP Resolution in Spring Boot 3</b><br/>
     <i>Issue:</i> Spring Boot 3 migrated to Jakarta EE, making traditional javax.servlet JSTL dependencies incompatible.<br/>
@@ -157,7 +167,7 @@ public String showUpdateBookForm(@PathVariable("id") Long id, Model model) {
     
     # 5. Github URL
     story.append(Paragraph("5. Github URL", heading_style))
-    story.append(Paragraph("https://github.com/[your-username]/LibraryManagementSystem", body_style))
+    story.append(Paragraph("https://github.com/dhruvb2028/AuthorBook-JPA-Manager", body_style))
     
     doc.build(story)
 
